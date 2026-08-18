@@ -10,33 +10,245 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AccessibilityStatementRouteImport } from './routes/accessibility-statement'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as CaseResultsRouteImport } from './routes/case-results'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
+import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as LegalDisclaimerRouteImport } from './routes/legal-disclaimer'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SmsTermsRouteImport } from './routes/sms-terms'
+import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
+import { Route as AreasWeServeNewJerseyRouteImport } from './routes/areas-we-serve.new-jersey'
+import { Route as AreasWeServeNewYorkRouteImport } from './routes/areas-we-serve.new-york'
+import { Route as PracticeAreasIndexRouteImport } from './routes/practice-areas.index'
+import { Route as PracticeAreasSlugRouteImport } from './routes/practice-areas.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessibilityStatementRoute = AccessibilityStatementRouteImport.update({
+  id: '/accessibility-statement',
+  path: '/accessibility-statement',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseResultsRoute = CaseResultsRouteImport.update({
+  id: '/case-results',
+  path: '/case-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiePolicyRoute = CookiePolicyRouteImport.update({
+  id: '/cookie-policy',
+  path: '/cookie-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalDisclaimerRoute = LegalDisclaimerRouteImport.update({
+  id: '/legal-disclaimer',
+  path: '/legal-disclaimer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SmsTermsRoute = SmsTermsRouteImport.update({
+  id: '/sms-terms',
+  path: '/sms-terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfUseRoute = TermsOfUseRouteImport.update({
+  id: '/terms-of-use',
+  path: '/terms-of-use',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasWeServeNewJerseyRoute = AreasWeServeNewJerseyRouteImport.update({
+  id: '/areas-we-serve/new-jersey',
+  path: '/areas-we-serve/new-jersey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasWeServeNewYorkRoute = AreasWeServeNewYorkRouteImport.update({
+  id: '/areas-we-serve/new-york',
+  path: '/areas-we-serve/new-york',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PracticeAreasIndexRoute = PracticeAreasIndexRouteImport.update({
+  id: '/practice-areas/',
+  path: '/practice-areas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PracticeAreasSlugRoute = PracticeAreasSlugRouteImport.update({
+  id: '/practice-areas/$slug',
+  path: '/practice-areas/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/accessibility-statement': typeof AccessibilityStatementRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
+  '/case-results': typeof CaseResultsRoute
+  '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/faqs': typeof FaqsRoute
+  '/legal-disclaimer': typeof LegalDisclaimerRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sms-terms': typeof SmsTermsRoute
+  '/terms-of-use': typeof TermsOfUseRoute
+  '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
+  '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas/$slug': typeof PracticeAreasSlugRoute
+  '/practice-areas/': typeof PracticeAreasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/accessibility-statement': typeof AccessibilityStatementRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
+  '/case-results': typeof CaseResultsRoute
+  '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/faqs': typeof FaqsRoute
+  '/legal-disclaimer': typeof LegalDisclaimerRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sms-terms': typeof SmsTermsRoute
+  '/terms-of-use': typeof TermsOfUseRoute
+  '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
+  '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas/$slug': typeof PracticeAreasSlugRoute
+  '/practice-areas': typeof PracticeAreasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/accessibility-statement': typeof AccessibilityStatementRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
+  '/case-results': typeof CaseResultsRoute
+  '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/faqs': typeof FaqsRoute
+  '/legal-disclaimer': typeof LegalDisclaimerRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sms-terms': typeof SmsTermsRoute
+  '/terms-of-use': typeof TermsOfUseRoute
+  '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
+  '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas/$slug': typeof PracticeAreasSlugRoute
+  '/practice-areas/': typeof PracticeAreasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/accessibility-statement'
+    | '/blog'
+    | '/careers'
+    | '/case-results'
+    | '/contact'
+    | '/cookie-policy'
+    | '/faqs'
+    | '/legal-disclaimer'
+    | '/privacy-policy'
+    | '/sms-terms'
+    | '/terms-of-use'
+    | '/areas-we-serve/new-jersey'
+    | '/areas-we-serve/new-york'
+    | '/practice-areas/$slug'
+    | '/practice-areas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/accessibility-statement'
+    | '/blog'
+    | '/careers'
+    | '/case-results'
+    | '/contact'
+    | '/cookie-policy'
+    | '/faqs'
+    | '/legal-disclaimer'
+    | '/privacy-policy'
+    | '/sms-terms'
+    | '/terms-of-use'
+    | '/areas-we-serve/new-jersey'
+    | '/areas-we-serve/new-york'
+    | '/practice-areas/$slug'
+    | '/practice-areas'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/accessibility-statement'
+    | '/blog'
+    | '/careers'
+    | '/case-results'
+    | '/contact'
+    | '/cookie-policy'
+    | '/faqs'
+    | '/legal-disclaimer'
+    | '/privacy-policy'
+    | '/sms-terms'
+    | '/terms-of-use'
+    | '/areas-we-serve/new-jersey'
+    | '/areas-we-serve/new-york'
+    | '/practice-areas/$slug'
+    | '/practice-areas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AccessibilityStatementRoute: typeof AccessibilityStatementRoute
+  BlogRoute: typeof BlogRoute
+  CareersRoute: typeof CareersRoute
+  CaseResultsRoute: typeof CaseResultsRoute
+  ContactRoute: typeof ContactRoute
+  CookiePolicyRoute: typeof CookiePolicyRoute
+  FaqsRoute: typeof FaqsRoute
+  LegalDisclaimerRoute: typeof LegalDisclaimerRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SmsTermsRoute: typeof SmsTermsRoute
+  TermsOfUseRoute: typeof TermsOfUseRoute
+  AreasWeServeNewJerseyRoute: typeof AreasWeServeNewJerseyRoute
+  AreasWeServeNewYorkRoute: typeof AreasWeServeNewYorkRoute
+  PracticeAreasSlugRoute: typeof PracticeAreasSlugRoute
+  PracticeAreasIndexRoute: typeof PracticeAreasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +260,139 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accessibility-statement': {
+      id: '/accessibility-statement'
+      path: '/accessibility-statement'
+      fullPath: '/accessibility-statement'
+      preLoaderRoute: typeof AccessibilityStatementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-results': {
+      id: '/case-results'
+      path: '/case-results'
+      fullPath: '/case-results'
+      preLoaderRoute: typeof CaseResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookie-policy': {
+      id: '/cookie-policy'
+      path: '/cookie-policy'
+      fullPath: '/cookie-policy'
+      preLoaderRoute: typeof CookiePolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal-disclaimer': {
+      id: '/legal-disclaimer'
+      path: '/legal-disclaimer'
+      fullPath: '/legal-disclaimer'
+      preLoaderRoute: typeof LegalDisclaimerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sms-terms': {
+      id: '/sms-terms'
+      path: '/sms-terms'
+      fullPath: '/sms-terms'
+      preLoaderRoute: typeof SmsTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-use': {
+      id: '/terms-of-use'
+      path: '/terms-of-use'
+      fullPath: '/terms-of-use'
+      preLoaderRoute: typeof TermsOfUseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas-we-serve/new-jersey': {
+      id: '/areas-we-serve/new-jersey'
+      path: '/areas-we-serve/new-jersey'
+      fullPath: '/areas-we-serve/new-jersey'
+      preLoaderRoute: typeof AreasWeServeNewJerseyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas-we-serve/new-york': {
+      id: '/areas-we-serve/new-york'
+      path: '/areas-we-serve/new-york'
+      fullPath: '/areas-we-serve/new-york'
+      preLoaderRoute: typeof AreasWeServeNewYorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practice-areas/': {
+      id: '/practice-areas/'
+      path: '/practice-areas'
+      fullPath: '/practice-areas/'
+      preLoaderRoute: typeof PracticeAreasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practice-areas/$slug': {
+      id: '/practice-areas/$slug'
+      path: '/practice-areas/$slug'
+      fullPath: '/practice-areas/$slug'
+      preLoaderRoute: typeof PracticeAreasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AccessibilityStatementRoute: AccessibilityStatementRoute,
+  BlogRoute: BlogRoute,
+  CareersRoute: CareersRoute,
+  CaseResultsRoute: CaseResultsRoute,
+  ContactRoute: ContactRoute,
+  CookiePolicyRoute: CookiePolicyRoute,
+  FaqsRoute: FaqsRoute,
+  LegalDisclaimerRoute: LegalDisclaimerRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SmsTermsRoute: SmsTermsRoute,
+  TermsOfUseRoute: TermsOfUseRoute,
+  AreasWeServeNewJerseyRoute: AreasWeServeNewJerseyRoute,
+  AreasWeServeNewYorkRoute: AreasWeServeNewYorkRoute,
+  PracticeAreasSlugRoute: PracticeAreasSlugRoute,
+  PracticeAreasIndexRoute: PracticeAreasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
