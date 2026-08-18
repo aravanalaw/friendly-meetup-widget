@@ -80,7 +80,7 @@ const TABS: Tab[] = [
 ];
 
 export function PracticeTabs() {
-  const [active, setActive] = useState(TABS[0].id);
+  const [active, setActive] = useState(TABS[0]!.id);
   const tab = TABS.find((t) => t.id === active)!;
 
   return (
@@ -108,8 +108,8 @@ export function PracticeTabs() {
                 onClick={() => setActive(t.id)}
                 onKeyDown={(e) => {
                   const i = TABS.findIndex((x) => x.id === active);
-                  if (e.key === "ArrowDown") setActive(TABS[(i + 1) % TABS.length].id);
-                  if (e.key === "ArrowUp") setActive(TABS[(i - 1 + TABS.length) % TABS.length].id);
+                  if (e.key === "ArrowDown") setActive(TABS[(i + 1) % TABS.length]!.id);
+                  if (e.key === "ArrowUp") setActive(TABS[(i - 1 + TABS.length) % TABS.length]!.id);
                 }}
                 className={`flex items-center gap-4 border px-5 py-4 text-left font-display text-sm uppercase tracking-[0.1em] transition-colors ${
                   selected
