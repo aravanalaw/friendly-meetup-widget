@@ -49,7 +49,7 @@ function Dropdown({ label, items }: { label: string; items: Item[] }) {
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
-        className="nav-link flex items-center gap-1 py-2"
+        className="nav-link flex items-center gap-1 whitespace-nowrap py-2"
       >
         {label}
         <ChevronDown className="h-3.5 w-3.5 text-gold-bright" aria-hidden="true" />
@@ -119,20 +119,20 @@ export function SiteHeader() {
       <div className="container-site flex items-center justify-between gap-6 py-3">
         <Logo />
 
-        <nav aria-label="Primary" className="hidden items-center gap-6 xl:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-5 xl:flex">
           <Dropdown label="About" items={ABOUT_ITEMS} />
           <Dropdown label="Areas We Serve" items={AREA_ITEMS} />
           <Dropdown label="Practice Areas" items={PRACTICE_ITEMS} />
-          <Link to="/faqs" className="nav-link" activeProps={{ className: "nav-link text-gold-bright" }}>
+          <Link to="/faqs" className="nav-link whitespace-nowrap" activeProps={{ className: "nav-link text-gold-bright" }}>
             FAQ's
           </Link>
-          <Link to="/case-results" className="nav-link" activeProps={{ className: "nav-link text-gold-bright" }}>
+          <Link to="/case-results" className="nav-link whitespace-nowrap" activeProps={{ className: "nav-link text-gold-bright" }}>
             Case Results
           </Link>
-          <Link to="/contact" className="nav-link" activeProps={{ className: "nav-link text-gold-bright" }}>
+          <Link to="/contact" className="nav-link whitespace-nowrap" activeProps={{ className: "nav-link text-gold-bright" }}>
             Contact Us
           </Link>
-          <a href={PHONE_HREF} className="flex items-center gap-2 font-display text-sm tracking-[0.08em] text-gold-bright">
+          <a href={PHONE_HREF} className="flex shrink-0 items-center gap-2 whitespace-nowrap font-display text-sm tracking-[0.08em] text-gold-bright">
             <Phone className="h-4 w-4" aria-hidden="true" />
             {PHONE_DISPLAY}
           </a>
