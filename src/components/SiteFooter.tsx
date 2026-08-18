@@ -74,7 +74,7 @@ export function SiteFooter() {
           <ul className="space-y-3 text-sm text-muted-foreground">
             {PRACTICE_AREAS.map((p) => (
               <li key={p.slug}>
-                <Link to={`/practice-areas/${p.slug}`} className="hover:text-gold-bright">
+                <Link to="/practice-areas/$slug" params={{ slug: p.slug }} className="hover:text-gold-bright">
                   {p.title}
                 </Link>
               </li>

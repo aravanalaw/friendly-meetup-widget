@@ -25,6 +25,7 @@ import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as AreasWeServeNewJerseyRouteImport } from './routes/areas-we-serve.new-jersey'
 import { Route as AreasWeServeNewYorkRouteImport } from './routes/areas-we-serve.new-york'
 import { Route as PracticeAreasIndexRouteImport } from './routes/practice-areas.index'
+import { Route as PracticeAreasSlugRouteImport } from './routes/practice-areas.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -106,6 +107,11 @@ const PracticeAreasIndexRoute = PracticeAreasIndexRouteImport.update({
   path: '/practice-areas/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticeAreasSlugRoute = PracticeAreasSlugRouteImport.update({
+  id: '/practice-areas/$slug',
+  path: '/practice-areas/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas/$slug': typeof PracticeAreasSlugRoute
   '/practice-areas/': typeof PracticeAreasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -141,6 +148,7 @@ export interface FileRoutesByTo {
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas/$slug': typeof PracticeAreasSlugRoute
   '/practice-areas': typeof PracticeAreasIndexRoute
 }
 export interface FileRoutesById {
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas/$slug': typeof PracticeAreasSlugRoute
   '/practice-areas/': typeof PracticeAreasIndexRoute
 }
 export interface FileRouteTypes {
@@ -180,6 +189,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/practice-areas/$slug'
     | '/practice-areas/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/practice-areas/$slug'
     | '/practice-areas'
   id:
     | '__root__'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/practice-areas/$slug'
     | '/practice-areas/'
   fileRoutesById: FileRoutesById
 }
@@ -235,6 +247,7 @@ export interface RootRouteChildren {
   TermsOfUseRoute: typeof TermsOfUseRoute
   AreasWeServeNewJerseyRoute: typeof AreasWeServeNewJerseyRoute
   AreasWeServeNewYorkRoute: typeof AreasWeServeNewYorkRoute
+  PracticeAreasSlugRoute: typeof PracticeAreasSlugRoute
   PracticeAreasIndexRoute: typeof PracticeAreasIndexRoute
 }
 
@@ -352,6 +365,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PracticeAreasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/practice-areas/$slug': {
+      id: '/practice-areas/$slug'
+      path: '/practice-areas/$slug'
+      fullPath: '/practice-areas/$slug'
+      preLoaderRoute: typeof PracticeAreasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -371,6 +391,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsOfUseRoute: TermsOfUseRoute,
   AreasWeServeNewJerseyRoute: AreasWeServeNewJerseyRoute,
   AreasWeServeNewYorkRoute: AreasWeServeNewYorkRoute,
+  PracticeAreasSlugRoute: PracticeAreasSlugRoute,
   PracticeAreasIndexRoute: PracticeAreasIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -62,7 +62,7 @@ function Dropdown({ label, items }: { label: string; items: Item[] }) {
           {items.map((item) => (
             <Link
               key={item.to}
-              to={item.to}
+              to={item.to as never}
               role="menuitem"
               onClick={() => setOpen(false)}
               className="block border-b border-border px-4 py-3 font-display text-[0.8rem] uppercase tracking-[0.1em] text-ecru transition-colors last:border-b-0 hover:bg-maroon hover:text-gold-bright"
@@ -97,7 +97,7 @@ function MobileAccordion({ label, items, onNavigate }: { label: string; items: I
           {items.map((item) => (
             <Link
               key={item.to}
-              to={item.to}
+              to={item.to as never}
               onClick={onNavigate}
               className="block py-2 pl-3 font-display text-[0.8rem] uppercase tracking-[0.1em] text-muted-foreground hover:text-gold-bright"
             >
