@@ -19,12 +19,12 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as LegalDisclaimerRouteImport } from './routes/legal-disclaimer'
-import { Route as PracticeAreasRouteImport } from './routes/practice-areas'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as SmsTermsRouteImport } from './routes/sms-terms'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as AreasWeServeNewJerseyRouteImport } from './routes/areas-we-serve.new-jersey'
 import { Route as AreasWeServeNewYorkRouteImport } from './routes/areas-we-serve.new-york'
+import { Route as PracticeAreasIndexRouteImport } from './routes/practice-areas.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,11 +76,6 @@ const LegalDisclaimerRoute = LegalDisclaimerRouteImport.update({
   path: '/legal-disclaimer',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PracticeAreasRoute = PracticeAreasRouteImport.update({
-  id: '/practice-areas',
-  path: '/practice-areas',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
@@ -106,6 +101,11 @@ const AreasWeServeNewYorkRoute = AreasWeServeNewYorkRouteImport.update({
   path: '/areas-we-serve/new-york',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticeAreasIndexRoute = PracticeAreasIndexRouteImport.update({
+  id: '/practice-areas/',
+  path: '/practice-areas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -118,12 +118,12 @@ export interface FileRoutesByFullPath {
   '/cookie-policy': typeof CookiePolicyRoute
   '/faqs': typeof FaqsRoute
   '/legal-disclaimer': typeof LegalDisclaimerRoute
-  '/practice-areas': typeof PracticeAreasRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas/': typeof PracticeAreasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -136,12 +136,12 @@ export interface FileRoutesByTo {
   '/cookie-policy': typeof CookiePolicyRoute
   '/faqs': typeof FaqsRoute
   '/legal-disclaimer': typeof LegalDisclaimerRoute
-  '/practice-areas': typeof PracticeAreasRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas': typeof PracticeAreasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -155,12 +155,12 @@ export interface FileRoutesById {
   '/cookie-policy': typeof CookiePolicyRoute
   '/faqs': typeof FaqsRoute
   '/legal-disclaimer': typeof LegalDisclaimerRoute
-  '/practice-areas': typeof PracticeAreasRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/practice-areas/': typeof PracticeAreasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -175,12 +175,12 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/faqs'
     | '/legal-disclaimer'
-    | '/practice-areas'
     | '/privacy-policy'
     | '/sms-terms'
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/practice-areas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -193,12 +193,12 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/faqs'
     | '/legal-disclaimer'
-    | '/practice-areas'
     | '/privacy-policy'
     | '/sms-terms'
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/practice-areas'
   id:
     | '__root__'
     | '/'
@@ -211,12 +211,12 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/faqs'
     | '/legal-disclaimer'
-    | '/practice-areas'
     | '/privacy-policy'
     | '/sms-terms'
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/practice-areas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -230,12 +230,12 @@ export interface RootRouteChildren {
   CookiePolicyRoute: typeof CookiePolicyRoute
   FaqsRoute: typeof FaqsRoute
   LegalDisclaimerRoute: typeof LegalDisclaimerRoute
-  PracticeAreasRoute: typeof PracticeAreasRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SmsTermsRoute: typeof SmsTermsRoute
   TermsOfUseRoute: typeof TermsOfUseRoute
   AreasWeServeNewJerseyRoute: typeof AreasWeServeNewJerseyRoute
   AreasWeServeNewYorkRoute: typeof AreasWeServeNewYorkRoute
+  PracticeAreasIndexRoute: typeof PracticeAreasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -310,13 +310,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalDisclaimerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/practice-areas': {
-      id: '/practice-areas'
-      path: '/practice-areas'
-      fullPath: '/practice-areas'
-      preLoaderRoute: typeof PracticeAreasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
@@ -352,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasWeServeNewYorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/practice-areas/': {
+      id: '/practice-areas/'
+      path: '/practice-areas'
+      fullPath: '/practice-areas/'
+      preLoaderRoute: typeof PracticeAreasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -366,12 +366,12 @@ const rootRouteChildren: RootRouteChildren = {
   CookiePolicyRoute: CookiePolicyRoute,
   FaqsRoute: FaqsRoute,
   LegalDisclaimerRoute: LegalDisclaimerRoute,
-  PracticeAreasRoute: PracticeAreasRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   SmsTermsRoute: SmsTermsRoute,
   TermsOfUseRoute: TermsOfUseRoute,
   AreasWeServeNewJerseyRoute: AreasWeServeNewJerseyRoute,
   AreasWeServeNewYorkRoute: AreasWeServeNewYorkRoute,
+  PracticeAreasIndexRoute: PracticeAreasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
