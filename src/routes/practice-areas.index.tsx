@@ -6,7 +6,7 @@ const TITLE = "Practice Areas | NY & NJ Personal Injury | ARAVANA LAW";
 const DESCRIPTION = "Personal injury practice areas handled by ARAVANA LAW across New York and New Jersey, from motor vehicle collisions to construction accidents.";
 const PATH = "/practice-areas";
 
-export const Route = createFileRoute("/practice-areas")({
+export const Route = createFileRoute("/practice-areas/")({
   head: () => ({
     meta: [
       { title: TITLE },
