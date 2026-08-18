@@ -107,7 +107,7 @@ export function SiteFooter() {
         type="button"
         aria-label="Back to top"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="absolute bottom-6 right-6 flex h-11 w-11 items-center justify-center rounded-full border border-border-strong text-gold-bright transition-colors hover:bg-maroon"
+        className="absolute bottom-24 right-6 flex h-11 w-11 items-center justify-center rounded-full border border-border-strong bg-surface-raised text-gold-bright transition-colors hover:bg-maroon"
       >
         <ArrowUp className="h-5 w-5" />
       </button>

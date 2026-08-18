@@ -1,31 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import colonnade from "@/assets/colonnade.png.asset.json";
+import logo from "@/assets/aravana-logo.png";
 
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-3" aria-label="ARAVANA LAW — home">
+    <Link to="/" className="inline-flex shrink-0 items-center" aria-label="ARAVANA LAW — home">
       <img
-        src={colonnade.url}
-        alt=""
-        aria-hidden="true"
-        width={48}
-        height={38}
-        className="h-9 w-auto shrink-0"
+        src={logo}
+        alt="ARAVANA LAW — We Do Justice"
+        width={626}
+        height={131}
+        decoding="async"
+        className={compact ? "h-8 w-auto" : "h-10 w-auto md:h-11"}
       />
-      <span className="flex flex-col leading-none">
-        <span
-          className="font-display text-ecru"
-          style={{ letterSpacing: "0.22em", fontSize: compact ? "1rem" : "1.15rem" }}
-        >
-          ARAVANA LAW
-        </span>
-        <span
-          className="mt-1 font-display text-gold-bright"
-          style={{ letterSpacing: "0.3em", fontSize: "0.55rem" }}
-        >
-          WE DO JUSTICE
-        </span>
-      </span>
     </Link>
   );
 }

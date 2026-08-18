@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { CalendarClock, ChevronDown, Menu, Phone, X } from "lucide-react";
 import { Logo } from "./Logo";
-import { PHONE_DISPLAY, PHONE_HREF, PRACTICE_AREAS } from "@/lib/site";
+import { CALENDLY_URL, PHONE_DISPLAY, PHONE_HREF, PRACTICE_AREAS } from "@/lib/site";
+import { openCalendly } from "@/lib/calendly";
 
 type Item = { label: string; to: string };
 
@@ -65,7 +66,7 @@ function Dropdown({ label, items }: { label: string; items: Item[] }) {
               to={item.to as never}
               role="menuitem"
               onClick={() => setOpen(false)}
-              className="block border-b border-border px-4 py-3 font-display text-[0.8rem] uppercase tracking-[0.1em] text-ecru transition-colors last:border-b-0 hover:bg-maroon hover:text-gold-bright"
+              className="block border-b border-border px-4 py-3 font-display text-[0.9rem] tracking-[0.03em] text-ecru transition-colors last:border-b-0 hover:bg-maroon hover:text-gold-bright"
             >
               {item.label}
             </Link>
@@ -99,7 +100,7 @@ function MobileAccordion({ label, items, onNavigate }: { label: string; items: I
               key={item.to}
               to={item.to as never}
               onClick={onNavigate}
-              className="block py-2 pl-3 font-display text-[0.8rem] uppercase tracking-[0.1em] text-muted-foreground hover:text-gold-bright"
+              className="block py-2 pl-3 font-display text-[0.9rem] tracking-[0.03em] text-muted-foreground hover:text-gold-bright"
             >
               {item.label}
             </Link>
@@ -132,8 +133,11 @@ export function SiteHeader() {
           <Link to="/contact" className="nav-link whitespace-nowrap" activeProps={{ className: "nav-link text-gold-bright" }}>
             Contact Us
           </Link>
-          <a href={PHONE_HREF} className="flex shrink-0 items-center gap-2 whitespace-nowrap font-display text-sm tracking-[0.08em] text-gold-bright">
-            <Phone className="h-4 w-4" aria-hidden="true" />
+          <a
+            href={PHONE_HREF}
+            className="flex shrink-0 items-center gap-2.5 whitespace-nowrap font-display text-2xl font-semibold tracking-[0.02em] text-gold-bright"
+          >
+            <Phone className="h-6 w-6" aria-hidden="true" />
             {PHONE_DISPLAY}
           </a>
         </nav>
@@ -171,10 +175,24 @@ export function SiteHeader() {
               Contact Us
             </Link>
           </nav>
-          <div className="border-t border-border bg-surface-raised p-4">
+          <div className="grid gap-3 border-t border-border bg-surface-raised p-4">
             <a href={PHONE_HREF} className="btn-gold w-full">
               <Phone className="h-4 w-4" aria-hidden="true" />
               {PHONE_DISPLAY}
+            </a>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                close();
+                void openCalendly();
+              }}
+              className="btn-ghost w-full"
+            >
+              <CalendarClock className="h-4 w-4" aria-hidden="true" />
+              Book a Meeting
             </a>
           </div>
         </div>

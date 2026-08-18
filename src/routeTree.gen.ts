@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AccessibilityStatementRouteImport } from './routes/accessibility-statement'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as CaseResultsRouteImport } from './routes/case-results'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -24,6 +23,8 @@ import { Route as SmsTermsRouteImport } from './routes/sms-terms'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as AreasWeServeNewJerseyRouteImport } from './routes/areas-we-serve.new-jersey'
 import { Route as AreasWeServeNewYorkRouteImport } from './routes/areas-we-serve.new-york'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as PracticeAreasIndexRouteImport } from './routes/practice-areas.index'
 import { Route as PracticeAreasSlugRouteImport } from './routes/practice-areas.$slug'
 
@@ -40,11 +41,6 @@ const AboutRoute = AboutRouteImport.update({
 const AccessibilityStatementRoute = AccessibilityStatementRouteImport.update({
   id: '/accessibility-statement',
   path: '/accessibility-statement',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -102,6 +98,16 @@ const AreasWeServeNewYorkRoute = AreasWeServeNewYorkRouteImport.update({
   path: '/areas-we-serve/new-york',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PracticeAreasIndexRoute = PracticeAreasIndexRouteImport.update({
   id: '/practice-areas/',
   path: '/practice-areas/',
@@ -117,7 +123,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessibility-statement': typeof AccessibilityStatementRoute
-  '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
   '/case-results': typeof CaseResultsRoute
   '/contact': typeof ContactRoute
@@ -129,14 +134,15 @@ export interface FileRoutesByFullPath {
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/practice-areas/$slug': typeof PracticeAreasSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/practice-areas/': typeof PracticeAreasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessibility-statement': typeof AccessibilityStatementRoute
-  '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
   '/case-results': typeof CaseResultsRoute
   '/contact': typeof ContactRoute
@@ -148,7 +154,9 @@ export interface FileRoutesByTo {
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/practice-areas/$slug': typeof PracticeAreasSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/practice-areas': typeof PracticeAreasIndexRoute
 }
 export interface FileRoutesById {
@@ -156,7 +164,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessibility-statement': typeof AccessibilityStatementRoute
-  '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
   '/case-results': typeof CaseResultsRoute
   '/contact': typeof ContactRoute
@@ -168,7 +175,9 @@ export interface FileRoutesById {
   '/terms-of-use': typeof TermsOfUseRoute
   '/areas-we-serve/new-jersey': typeof AreasWeServeNewJerseyRoute
   '/areas-we-serve/new-york': typeof AreasWeServeNewYorkRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/practice-areas/$slug': typeof PracticeAreasSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/practice-areas/': typeof PracticeAreasIndexRoute
 }
 export interface FileRouteTypes {
@@ -177,7 +186,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/accessibility-statement'
-    | '/blog'
     | '/careers'
     | '/case-results'
     | '/contact'
@@ -189,14 +197,15 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/blog/$slug'
     | '/practice-areas/$slug'
+    | '/blog/'
     | '/practice-areas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/accessibility-statement'
-    | '/blog'
     | '/careers'
     | '/case-results'
     | '/contact'
@@ -208,14 +217,15 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/blog/$slug'
     | '/practice-areas/$slug'
+    | '/blog'
     | '/practice-areas'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/accessibility-statement'
-    | '/blog'
     | '/careers'
     | '/case-results'
     | '/contact'
@@ -227,7 +237,9 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/areas-we-serve/new-jersey'
     | '/areas-we-serve/new-york'
+    | '/blog/$slug'
     | '/practice-areas/$slug'
+    | '/blog/'
     | '/practice-areas/'
   fileRoutesById: FileRoutesById
 }
@@ -235,7 +247,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AccessibilityStatementRoute: typeof AccessibilityStatementRoute
-  BlogRoute: typeof BlogRoute
   CareersRoute: typeof CareersRoute
   CaseResultsRoute: typeof CaseResultsRoute
   ContactRoute: typeof ContactRoute
@@ -247,7 +258,9 @@ export interface RootRouteChildren {
   TermsOfUseRoute: typeof TermsOfUseRoute
   AreasWeServeNewJerseyRoute: typeof AreasWeServeNewJerseyRoute
   AreasWeServeNewYorkRoute: typeof AreasWeServeNewYorkRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   PracticeAreasSlugRoute: typeof PracticeAreasSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   PracticeAreasIndexRoute: typeof PracticeAreasIndexRoute
 }
 
@@ -272,13 +285,6 @@ declare module '@tanstack/react-router' {
       path: '/accessibility-statement'
       fullPath: '/accessibility-statement'
       preLoaderRoute: typeof AccessibilityStatementRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -358,6 +364,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasWeServeNewYorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/practice-areas/': {
       id: '/practice-areas/'
       path: '/practice-areas'
@@ -379,7 +399,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AccessibilityStatementRoute: AccessibilityStatementRoute,
-  BlogRoute: BlogRoute,
   CareersRoute: CareersRoute,
   CaseResultsRoute: CaseResultsRoute,
   ContactRoute: ContactRoute,
@@ -391,7 +410,9 @@ const rootRouteChildren: RootRouteChildren = {
   TermsOfUseRoute: TermsOfUseRoute,
   AreasWeServeNewJerseyRoute: AreasWeServeNewJerseyRoute,
   AreasWeServeNewYorkRoute: AreasWeServeNewYorkRoute,
+  BlogSlugRoute: BlogSlugRoute,
   PracticeAreasSlugRoute: PracticeAreasSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   PracticeAreasIndexRoute: PracticeAreasIndexRoute,
 }
 export const routeTree = rootRouteImport

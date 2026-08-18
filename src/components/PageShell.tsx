@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Divider } from "./Divider";
+import { Reveal } from "./Reveal";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 export function PageHero({
@@ -13,7 +14,7 @@ export function PageHero({
 }) {
   return (
     <section className="border-b border-border bg-surface-raised py-16 md:py-24">
-      <div className="container-site">
+      <Reveal className="container-site">
         <nav aria-label="Breadcrumb" className="mb-6 text-xs uppercase tracking-[0.14em] text-muted-foreground">
           {crumbs.map((c, i) => (
             <span key={c.path}>
@@ -30,7 +31,7 @@ export function PageHero({
         </nav>
         {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
         <h1 className="h1-hero text-ecru">{title}</h1>
-      </div>
+      </Reveal>
     </section>
   );
 }

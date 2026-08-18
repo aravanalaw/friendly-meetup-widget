@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
 import { CASE_TYPES, FORM_MICROCOPY, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 const FORM_ENDPOINT = "/api/public/case-review";
@@ -63,7 +64,7 @@ export function FreeCaseReview() {
   return (
     <section id="book" className="bg-surface-base py-20 md:py-28">
       <div className="container-site">
-        <div className="mx-auto max-w-3xl border border-border bg-surface-raised p-6 md:p-12">
+        <Reveal className="mx-auto max-w-3xl border border-border bg-surface-raised p-6 md:p-12">
           <h2 className="h2-section text-center">
             <span className="text-gold-bright">Free</span> <span className="text-ecru">Case Review</span>
           </h2>
@@ -167,7 +168,7 @@ export function FreeCaseReview() {
               </div>
             </form>
           )}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,18 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Gavel, Handshake, Map, Phone, User } from "lucide-react";
+import type { CSSProperties } from "react";
 import { Divider } from "@/components/Divider";
+import { Reveal } from "@/components/Reveal";
 import { PracticeTabs } from "@/components/home/PracticeTabs";
 import { FreeCaseReview } from "@/components/home/FreeCaseReview";
+import { Typewriter } from "@/components/home/Typewriter";
 import { PHONE_DISPLAY, PHONE_HREF, SITE_URL } from "@/lib/site";
 import heroSkyline from "@/assets/hero-skyline.jpg";
+import goldArc from "@/assets/gold-arc.png";
 import officeWindow from "@/assets/office-window.jpg";
-import officeDesk from "@/assets/office-desk.jpg";
+import attorneyPhone from "@/assets/attorney-phone.png";
 import suitBand from "@/assets/suit-band.jpg";
-import araPortrait from "@/assets/ara-naljian.png.asset.json";
 
 const TITLE = "New York & New Jersey Personal Injury Lawyer | ARAVANA LAW";
 const DESCRIPTION =
-  "ARAVANA LAW represents injured people across New York and New Jersey. Work directly with attorney Ara Naljian. Free consultation. No Win, No Fee. (347) 456-8567.";
+  "ARAVANA LAW represents injured people across New York and New Jersey. Work directly with attorney Ara Naljian. Free consultation. No Win, No Fee. (332) 456-8567.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,10 +28,15 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: `${SITE_URL}/` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
+      { rel: "preload", as: "image", href: heroSkyline, fetchPriority: "high" },
+    ],
   }),
   component: Index,
 });
+
+const TYPE_WORDS = ["Promise.", "Priority.", "Presence."] as const;
 
 const TRUST_ITEMS = [
   { Icon: User, lines: ["Direct Attorney", "Representation"] },
@@ -73,29 +81,42 @@ function Index() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-clip">
         <img
           src={heroSkyline}
           alt="New York City skyline at night"
           width={1920}
           height={1080}
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover opacity-90"
         />
+        {/* Lighter overlay: dark on the left for text contrast, skyline kept
+            clearly visible toward the center and right */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(90deg, rgba(22,5,7,0.98) 0%, rgba(22,5,7,0.92) 42%, rgba(43,10,16,0.6) 100%)",
+              "linear-gradient(90deg, rgba(22,5,7,0.93) 0%, rgba(22,5,7,0.72) 34%, rgba(43,10,16,0.28) 66%, rgba(43,10,16,0.18) 100%)",
           }}
           aria-hidden="true"
         />
-        <div className="container-site relative grid items-center gap-8 py-20 md:min-h-[88vh] md:grid-cols-[1.15fr_0.85fr] md:py-24">
-          <div>
+        <img
+          src={goldArc}
+          alt=""
+          aria-hidden="true"
+          width={645}
+          height={1024}
+          decoding="async"
+          className="pointer-events-none absolute right-0 top-0 hidden h-full w-auto -scale-x-100 md:block"
+        />
+        <div className="container-site relative grid items-center gap-8 md:min-h-[92vh] md:grid-cols-[1.1fr_0.9fr]">
+          <Reveal className="py-20 md:py-24">
             <p className="eyebrow">Dedicated to protecting your rights.</p>
             <h1 className="h1-hero mt-6 text-ecru">
               Your Case
               <span className="block">My Personal</span>
-              <span className="block text-gold-bright">Presence.</span>
+              <Typewriter words={TYPE_WORDS} className="block text-gold-bright" />
             </h1>
             <div className="mt-8 space-y-2 text-lg text-ecru md:text-xl">
               <p>
@@ -108,37 +129,44 @@ function Index() {
             <Link to="/contact" className="btn-gold mt-10 w-full sm:w-auto">
               Speak with an attorney today →
             </Link>
-          </div>
-          <div className="hidden md:block">
+          </Reveal>
+          <Reveal variant="fade" delay={250} className="hidden self-stretch md:flex md:items-end">
             <img
-              src={araPortrait.url}
+              src="/ara.png"
               alt="Attorney Ara Naljian, founder of ARAVANA LAW"
               width={720}
               height={960}
-              className="mx-auto max-h-[70vh] w-auto object-contain"
+              fetchPriority="high"
+              decoding="async"
+              className="mx-auto max-h-[80vh] w-auto object-contain"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* TRUST BAR */}
-      <div className="container-site relative z-10 -mt-8">
-        <ul className="grid grid-cols-2 gap-6 border border-border bg-surface-raised p-6 md:grid-cols-4 md:p-8">
-          {TRUST_ITEMS.map((item) => (
-            <li key={item.lines[0]} className="flex flex-col items-center gap-3 text-center">
-              <item.Icon className="h-7 w-7 text-gold-bright" strokeWidth={1.5} aria-hidden="true" />
-              <span className="font-display text-[0.7rem] uppercase leading-relaxed tracking-[0.14em] text-ecru md:text-xs">
+      {/* TRUST BAR — horizontal items with gold dividers, overlapping the hero */}
+      <div className="container-site relative z-10 -mt-12">
+        <ul className="grid grid-cols-1 rounded-[10px] border border-border bg-surface-raised/95 backdrop-blur sm:grid-cols-2 md:grid-cols-4 md:divide-x md:divide-border">
+          {TRUST_ITEMS.map((item, i) => (
+            <Reveal
+              as="li"
+              key={item.lines[0]}
+              delay={i * 120}
+              className="flex items-center gap-4 px-6 py-5"
+            >
+              <item.Icon className="h-8 w-8 shrink-0 text-gold-bright" strokeWidth={1.25} aria-hidden="true" />
+              <span className="font-display text-[0.72rem] uppercase leading-relaxed tracking-[0.12em] text-ecru">
                 {item.lines[0]}
                 <span className="block">{item.lines[1]}</span>
               </span>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </div>
 
       {/* ABOUT PREVIEW */}
       <section className="container-site grid items-center gap-12 py-20 md:grid-cols-2 md:py-28">
-        <div>
+        <Reveal>
           <p className="eyebrow">About ARAVANA LAW</p>
           <h2 className="h2-section mt-5 text-ecru">
             Personal Attention
@@ -166,27 +194,29 @@ function Index() {
           <Link to="/about" className="btn-gold mt-10">
             Learn more about us →
           </Link>
-        </div>
-        <div className="arch-frame mx-auto max-w-md">
+        </Reveal>
+        <Reveal variant="right" delay={150} className="arch-frame mx-auto max-w-md">
           <img
             src={officeWindow}
             alt="High-rise law office window overlooking the New York skyline"
             width={900}
             height={1200}
             loading="lazy"
+            decoding="async"
             className="h-full w-full rounded-t-[999px] object-cover"
           />
-        </div>
+        </Reveal>
       </section>
 
       {/* FULL-WIDTH IMAGE BAND */}
-      <div className="relative h-[45vh] w-full overflow-hidden md:h-[60vh]" aria-hidden="true">
+      <div className="relative h-[45vh] w-full overflow-clip md:h-[60vh]" aria-hidden="true">
         <img
           src={suitBand}
           alt=""
           width={1920}
           height={900}
           loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover"
         />
         <div
@@ -200,38 +230,43 @@ function Index() {
 
       {/* STATEMENT BAND */}
       <section className="bg-background py-20 text-center md:py-24">
-        <h2 className="h2-section text-ecru">
-          When everything is on the line.
-          <span className="block">I'm ready.</span>
-        </h2>
+        <Reveal>
+          <h2 className="h2-section text-gold-bright">
+            When everything is on the line.
+            <span className="block">I'm ready.</span>
+          </h2>
+        </Reveal>
       </section>
 
       <Divider />
 
       {/* MEET THE ATTORNEY */}
       <section className="container-site py-16 md:py-24">
-        <h2 className="h2-section text-center text-ecru">Meet the Attorney</h2>
+        <Reveal>
+          <h2 className="h2-section text-center text-ecru">Meet the Attorney</h2>
+        </Reveal>
         <div className="mt-14 grid items-start gap-10 lg:grid-cols-3">
-          <div>
+          <Reveal variant="left">
             <h3 className="h3-card text-ecru">Dedicated to your justice</h3>
             <p className="mt-5 text-muted-foreground">
               When you work with <Gold>ARAVANA LAW</Gold>, you work directly with Attorney Ara Naljian, a
               skilled, strategic and compassionate advocate who puts your interests first.
             </p>
-          </div>
-          <div className="border border-border p-2">
+          </Reveal>
+          <Reveal variant="fade" delay={150} className="border border-border p-2">
             <img
-              src={officeDesk}
-              alt="Mahogany law office desk with legal volumes at ARAVANA LAW"
-              width={900}
-              height={1100}
+              src={attorneyPhone}
+              alt="Ara Naljian taking a client call at his desk in front of law volumes"
+              width={720}
+              height={959}
               loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover"
             />
-          </div>
-          <div>
-            <p className="font-display text-4xl text-gold-bright">Ara Naljian</p>
-            <p className="mt-3 font-display text-sm uppercase tracking-[0.16em] text-ecru">
+          </Reveal>
+          <Reveal variant="right" delay={250}>
+            <p className="font-display text-4xl text-ecru">Ara Naljian</p>
+            <p className="mt-3 font-display text-sm uppercase tracking-[0.16em] text-gold-bright">
               Founder &amp; Managing Attorney
             </p>
             <div className="card-gold mt-6 space-y-4 p-6 text-muted-foreground">
@@ -242,14 +277,14 @@ function Index() {
               </p>
               <p>You will always work directly with me because your case deserves my full attention.</p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <PracticeTabs />
 
-      {/* WHY ARAVANA LAW */}
-      <section className="relative overflow-hidden py-20 md:py-28">
+      {/* WHY ARAVANA LAW — sticky intro column + scroll-stacking cards */}
+      <section className="relative overflow-clip py-20 md:py-28">
         <img
           src={heroSkyline}
           alt=""
@@ -257,18 +292,22 @@ function Index() {
           width={1920}
           height={1080}
           loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover opacity-25"
         />
         <div className="absolute inset-0 bg-[#160507]/85" aria-hidden="true" />
         <div className="container-site relative grid gap-12 lg:grid-cols-2">
-          <div className="flex flex-col">
-            <h2 className="h2-section text-ecru">Why ARAVANA LAW</h2>
-            <p className="mt-6 max-w-md text-muted-foreground">
-              An attorney who has stood in a courtroom, selected juries, cross examined defense experts, and
-              tried cases to verdict.
-            </p>
-            <div className="mt-auto pt-14">
-              <p className="font-display text-lg uppercase leading-relaxed tracking-[0.1em] text-gold-bright">
+          <div className="flex flex-col lg:sticky lg:top-32 lg:self-start">
+            <Reveal>
+              <h2 className="h2-section text-ecru">Why ARAVANA LAW</h2>
+              <p className="mt-6 max-w-md text-muted-foreground">
+                An attorney who has stood in a courtroom, selected juries, cross examined defense experts, and
+                tried cases to verdict.
+              </p>
+            </Reveal>
+            <Reveal delay={150} className="pt-14">
+              {/* Client: "regular font all white" — body face, ecru */}
+              <p className="text-lg uppercase leading-relaxed tracking-[0.08em] text-ecru">
                 An attorney handles your case.
                 <span className="block">Not an intake specialist.</span>
                 <span className="block">Not a case manager.</span>
@@ -276,17 +315,21 @@ function Index() {
               </p>
               <a
                 href={PHONE_HREF}
-                className="mt-8 inline-flex items-center gap-3 font-display text-2xl tracking-[0.06em] text-gold-bright"
+                className="mt-8 inline-flex items-center gap-3 text-2xl tracking-[0.04em] text-ecru"
               >
                 <Phone className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
                 {PHONE_DISPLAY}
               </a>
-            </div>
+            </Reveal>
           </div>
 
           <div className="space-y-6">
-            {WHY_CARDS.map((card) => (
-              <article key={card.n} className="card-gold relative p-7">
+            {WHY_CARDS.map((card, i) => (
+              <article
+                key={card.n}
+                className="stack-card card-gold relative p-7"
+                style={{ "--stack-i": i } as CSSProperties}
+              >
                 <span
                   className="absolute right-5 top-2 font-display text-5xl text-gold-bright/15"
                   aria-hidden="true"

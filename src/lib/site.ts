@@ -1,9 +1,9 @@
 export const SITE_URL = "https://aravanalaw.com";
 
-export const PHONE_DISPLAY = "(347) 456-8567";
-export const PHONE_HREF = "tel:+13474568567";
+export const PHONE_DISPLAY = "(332) 456-8567";
+export const PHONE_HREF = "tel:+13324568567";
 export const EMAIL = "ara@aravanalaw.com";
-export const LINKEDIN = "https://www.linkedin.com/company/aravana-law";
+export const LINKEDIN = "https://www.linkedin.com/in/ara-naljian-67b4691aa";
 export const CALENDLY_URL = "https://calendly.com/aravanalaw";
 
 export const OFFICES = [
@@ -14,6 +14,9 @@ export const OFFICES = [
     city: "Rochelle Park",
     state: "NJ",
     zip: "07662",
+    lat: 40.9038034,
+    lng: -74.0711624,
+    mapsUrl: "https://maps.app.goo.gl/znijTChtVChCZJfx6",
   },
   {
     label: "NEW YORK OFFICE",
@@ -22,8 +25,13 @@ export const OFFICES = [
     city: "New York",
     state: "NY",
     zip: "10007",
+    lat: 40.713125,
+    lng: -74.008324,
+    mapsUrl: "https://maps.app.goo.gl/otoCFbXv7wMzVxnU6",
   },
 ] as const;
+
+export type Office = (typeof OFFICES)[number];
 
 export const PRACTICE_AREAS = [
   { title: "Bicycle Accidents", slug: "bicycle-accidents" },
@@ -57,13 +65,24 @@ export const SITE_GRAPH = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "ARAVANA LAW",
+      alternateName: "Aravana Law – We Do Justice",
+      inLanguage: "en-US",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
       "@type": "LegalService",
       "@id": `${SITE_URL}/#organization`,
       name: "ARAVANA LAW",
       alternateName: ["Naljian Law Firm PLLC", "Naljian Law Firm LLC"],
+      slogan: "We Do Justice",
       url: SITE_URL,
       logo: `${SITE_URL}/favicon.ico`,
-      telephone: "+1-347-456-8567",
+      image: `${SITE_URL}/og-image.jpg`,
+      telephone: "+1-332-456-8567",
       email: EMAIL,
       sameAs: [LINKEDIN],
       areaServed: ["New York", "New Jersey"],
@@ -72,7 +91,7 @@ export const SITE_GRAPH = {
         {
           "@type": "LegalService",
           name: "ARAVANA LAW — New York Office",
-          telephone: "+1-347-456-8567",
+          telephone: "+1-332-456-8567",
           address: {
             "@type": "PostalAddress",
             streetAddress: "11 Park Place, 3rd Floor",
@@ -85,7 +104,7 @@ export const SITE_GRAPH = {
         {
           "@type": "LegalService",
           name: "ARAVANA LAW — New Jersey Office",
-          telephone: "+1-347-456-8567",
+          telephone: "+1-332-456-8567",
           address: {
             "@type": "PostalAddress",
             streetAddress: "174 Route 17 North, Suite 201",

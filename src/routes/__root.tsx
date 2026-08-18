@@ -14,7 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { BookTab } from "@/components/BookTab";
-import { SITE_GRAPH } from "@/lib/site";
+import { BookFab } from "@/components/BookFab";
+import { SITE_GRAPH, SITE_URL } from "@/lib/site";
 
 function NotFoundComponent() {
   return (
@@ -88,9 +89,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "ARAVANA LAW represents injured people across New York and New Jersey. Work directly with attorney Ara Naljian. Free consultation. No Win, No Fee.",
       },
       { name: "author", content: "Ara V. Naljian, Esq." },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "theme-color", content: "#160507" },
       { property: "og:site_name", content: "ARAVANA LAW" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: "ARAVANA LAW — New York & New Jersey personal injury law firm",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -98,11 +110,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon", sizes: "48x48" },
+      { rel: "icon", href: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
     ],
     scripts: [
+      // Gate animation start-states behind html.js before first paint, so
+      // content stays visible for crawlers and no-JS visitors.
+      { children: "document.documentElement.classList.add('js')" },
       { type: "application/ld+json", children: JSON.stringify(SITE_GRAPH) },
     ],
   }),
@@ -114,7 +131,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning: the inline head script adds class="js" before
+    // React hydrates, which is an expected server/client attribute difference.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
@@ -139,6 +158,7 @@ function RootComponent() {
       </a>
       <SiteHeader />
       <BookTab />
+      <BookFab />
       <main id="main">
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />

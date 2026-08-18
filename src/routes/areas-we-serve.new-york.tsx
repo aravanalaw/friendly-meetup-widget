@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, PagePlaceholder } from "@/components/PageShell";
-import { SITE_URL, breadcrumb } from "@/lib/site";
+import { OfficeSection } from "@/components/OfficeSection";
+import { OFFICES, SITE_URL, breadcrumb } from "@/lib/site";
 
 const TITLE = "New York Personal Injury Lawyer | ARAVANA LAW";
-const DESCRIPTION = "ARAVANA LAW represents injured people throughout New York from its office at 11 Park Place, New York, NY. Free consultation. (347) 456-8567.";
+const DESCRIPTION = "ARAVANA LAW represents injured people throughout New York from its office at 11 Park Place, New York, NY. Free consultation. (332) 456-8567.";
 const PATH = "/areas-we-serve/new-york";
 
 export const Route = createFileRoute("/areas-we-serve/new-york")({
@@ -44,6 +45,7 @@ function Page() {
           { name: "New York", path: PATH },
         ]}
       />
+      <OfficeSection office={OFFICES[1]} heading="Our New York Office" />
       <PagePlaceholder />
     </>
   );

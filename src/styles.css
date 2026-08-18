@@ -29,8 +29,10 @@
 }
 
 :root {
-  --font-display-stack: "Bodoni Moda", Didot, "Bodoni MT", Garamond, "Times New Roman", serif;
-  --font-body-stack: "EB Garamond", Garamond, "Times New Roman", serif;
+  /* Fonts of the approved WP homepage capture (18 Aug): Libre Baskerville
+     display + Merriweather body. */
+  --font-display-stack: "Libre Baskerville", Baskerville, Georgia, "Times New Roman", serif;
+  --font-body-stack: "Merriweather", Georgia, "Times New Roman", serif;
 
   --aravana-maroon: #5c1a24;
   --aravana-gold: #8a6400;
@@ -57,20 +59,23 @@
 
   html {
     scroll-behavior: smooth;
+    /* clip (not hidden) keeps position:sticky working while preventing
+       horizontal overflow from reveal slide-ins */
+    overflow-x: clip;
   }
 
   body {
     background-color: var(--surface-base);
     color: var(--text-primary);
     font-family: var(--font-body-stack);
-    font-size: 1.0625rem;
-    line-height: 1.65;
+    font-size: 0.9375rem;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
 
   @media (min-width: 768px) {
     body {
-      font-size: 1.125rem;
+      font-size: 1rem;
     }
   }
 
@@ -108,28 +113,29 @@
 
 @utility h1-hero {
   font-family: var(--font-display-stack);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-  font-size: clamp(2.5rem, 6.2vw, 5.25rem);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  /* 2.8rem floor: client flagged the mobile hero as "very small" */
+  font-size: clamp(2.8rem, 6vw, 5rem);
 }
 
 @utility h2-section {
   font-family: var(--font-display-stack);
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  line-height: 1.12;
-  font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+  line-height: 1.15;
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
 }
 
 @utility h3-card {
   font-family: var(--font-display-stack);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
 }
 
 @utility btn-gold {
@@ -143,14 +149,19 @@
   text-transform: uppercase;
   letter-spacing: 0.09em;
   padding: 0.9rem 2.2rem;
-  border-radius: 2px;
+  border-radius: 8px;
   background: var(--cta-gradient);
   color: var(--cta-text);
-  transition: filter 180ms ease, box-shadow 180ms ease;
+  transition: filter 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 
   &:hover {
     filter: brightness(1.07);
     box-shadow: 0 0 0 1px var(--aravana-gold-bright), 0 0 22px rgba(232, 195, 78, 0.28);
+    transform: scale(1.04);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }
 
@@ -164,14 +175,19 @@
   text-transform: uppercase;
   letter-spacing: 0.09em;
   padding: 0.85rem 2rem;
-  border-radius: 2px;
+  border-radius: 8px;
   border: 1px solid var(--border-gold-strong);
   color: var(--aravana-ecru);
-  transition: background-color 180ms ease, color 180ms ease;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
 
   &:hover {
     background-color: var(--aravana-maroon);
     color: var(--aravana-gold-bright);
+    transform: scale(1.04);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }
 
@@ -203,4 +219,132 @@
   border-radius: 999px 999px 2px 2px;
   overflow: hidden;
   padding: 6px;
+}
+
+/* Gold gradient text, used by the hero typewriter word. */
+@utility text-gold-gradient {
+  background: var(--cta-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/*
+ * Scroll-reveal. The hidden start state is gated behind `html.js` (added by
+ * an inline script before first paint), so server HTML, crawlers, and no-JS
+ * visitors always see the content.
+ */
+html.js [data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+html.js [data-reveal="up"] {
+  transform: translateY(28px);
+}
+
+html.js [data-reveal="left"] {
+  transform: translateX(-32px);
+}
+
+html.js [data-reveal="right"] {
+  transform: translateX(32px);
+}
+
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Blinking cursor for the hero typewriter, mirroring the WordPress widget. */
+.type-cursor {
+  animation: cursor-blink 0.7s infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Fade-in for practice-area tab panes ("animated fadeIn" on WordPress). */
+.tab-fade {
+  animation: tab-fade-in 450ms ease both;
+}
+
+@keyframes tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * Stacking cards ("Why Aravana Law"): each card pins below the header at a
+ * slightly deeper offset so later cards slide over earlier ones on scroll.
+ * Set `--stack-i` per card. Ancestors must use overflow-clip, not
+ * overflow-hidden, or sticky positioning breaks.
+ */
+.stack-card {
+  position: sticky;
+  top: calc(6.5rem + var(--stack-i, 0) * 1.1rem);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Brand the Leaflet popup to match the site (only applies on map pages). */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  border: 1px solid var(--border-gold-soft);
+  border-radius: 2px;
+}
+
+.leaflet-popup-content {
+  font-family: var(--font-body-stack);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.leaflet-popup-content a {
+  color: var(--aravana-gold-bright);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--aravana-ecru);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .type-cursor {
+    animation: none;
+  }
+
+  .tab-fade {
+    animation: none;
+  }
+
+  .stack-card {
+    position: static;
+  }
 }

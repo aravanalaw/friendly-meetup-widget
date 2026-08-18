@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, PagePlaceholder } from "@/components/PageShell";
 import { SITE_URL, breadcrumb } from "@/lib/site";
 
-const TITLE = "Contact ARAVANA LAW | NY & NJ Injury Attorney | (347) 456-8567";
-const DESCRIPTION = "Contact ARAVANA LAW for a free consultation. Offices in New York, NY and Rochelle Park, NJ. Call (347) 456-8567. No Win, No Fee.";
+const TITLE = "Contact ARAVANA LAW | NY & NJ Injury Attorney | (332) 456-8567";
+const DESCRIPTION = "Contact ARAVANA LAW for a free consultation. Offices in New York, NY and Rochelle Park, NJ. Call (332) 456-8567. No Win, No Fee.";
 const PATH = "/contact";
 
 export const Route = createFileRoute("/contact")({
